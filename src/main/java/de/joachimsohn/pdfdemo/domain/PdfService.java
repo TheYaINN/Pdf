@@ -1,17 +1,13 @@
 package de.joachimsohn.pdfdemo.domain;
 
+import de.joachimsohn.pdfdemo.web.model.PdfDto;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface PdfService {
 
-    @NotNull Pdf save(final @NotNull Pdf pdf);
+    @NotNull PdfDto fetchById(final @NotNull UUID id);
 
-    @NotNull List<Pdf> fetch();
-
-    @NotNull Pdf update(final @NotNull Pdf pdf, final @NotNull UUID id);
-
-    void deleteById(final @NotNull UUID id);
+    @NotNull PdfDto create(final @NotNull Object body);
 }

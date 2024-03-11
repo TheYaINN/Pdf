@@ -1,6 +1,7 @@
-package de.joachimsohn.pdfdemo.domain;
+package de.joachimsohn.pdfdemo.domain.repository.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,10 @@ import java.util.UUID;
 public final class Pdf {
 
     @Id
+    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
+    @Column(nullable = false)
     private String path;
 }
