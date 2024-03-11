@@ -28,6 +28,7 @@ public final class PrintController {
 
     /**
      * Extra info: <a href="https://stackoverflow.com/questions/5673260/downloading-a-file-from-spring-controllers">...</a>
+     * TODO: should actually be a PUT request with a body, that is supposed to be mapped into a Dto and then used in the domain, but is as for now kept simple to avoid complexity
      */
     @GetMapping
     public @NotNull ResponseEntity<InputStreamResource> print() {
@@ -40,16 +41,14 @@ public final class PrintController {
     }
 
     private ResponseEntity<InputStreamResource> createResponse(final @NotNull PdfDto pdf) {
-        final var mediaType = MediaTypeFactory
-                .getMediaType("test.pdf")
-                .orElse(MediaType.APPLICATION_OCTET_STREAM);
         final var headers = new HttpHeaders();
-        headers.setContentType(mediaType);
-        final var disposition = ContentDisposition
+        headers.setContentType(MediaTypeFactory
+                .getMediaType(pdf.getName())
+                .orElse(MediaType.APPLICATION_OCTET_STREAM));
+        headers.setContentDisposition(ContentDisposition
                 .inline()
                 .filename(pdf.getName())
-                .build();
-        headers.setContentDisposition(disposition);
+                .build());
         return new ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(pdf.getContent())), headers, HttpStatus.OK);
     }
 }

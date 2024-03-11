@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.UUID;
 
 @Component
 public final class LocalFileHandler implements PdfHandler {
@@ -17,7 +18,8 @@ public final class LocalFileHandler implements PdfHandler {
     private String basePath;
 
     @Override
-    public String save(final byte[] content, final @NotNull String name) {
+    public String save(final byte[] content, final @NotNull UUID id) {
+        final var name = id.toString();
         final var folderPath = "%s/%s".formatted(basePath, Arrays.stream(name.split("-")).findFirst().orElseThrow());
         final var filePath = "%s/%s.pdf".formatted(folderPath, name);
         final var folder = new File(folderPath);

@@ -32,12 +32,13 @@ final class PdfServiceImpl implements PdfService {
         final var pdf = pdfCreationService.generatePdfFromHtml();
         final var id = UUID.randomUUID();
         CompletableFuture.runAsync(() -> {
-            final var path = saver.save(pdf, id.toString());
+            final var path = saver.save(pdf, id);
             repository.save(Pdf.builder().path(path).id(id).build());
         });
         return PdfDto.builder()
-                .content(pdf)
                 .id(id)
+                .name("%s.pdf".formatted(id))
+                .content(pdf)
                 .build();
     }
 }
