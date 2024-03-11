@@ -31,8 +31,8 @@ public final class PrintController {
      * TODO: should actually be a PUT request with a body, that is supposed to be mapped into a Dto and then used in the domain, but is as for now kept simple to avoid complexity
      */
     @GetMapping
-    public @NotNull ResponseEntity<InputStreamResource> print() {
-        return createResponse(pdfService.create(new Object()));
+    public @NotNull ResponseEntity<PdfDto> print() {
+        return ResponseEntity.ok(pdfService.create(new Object()));
     }
 
     @GetMapping("{id}")
