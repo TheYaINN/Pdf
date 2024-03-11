@@ -12,8 +12,9 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public final class PdfDemoRestClientImpl implements PdfDemoRestClient {
+public class PdfDemoRestClientImpl implements PdfDemoRestClient {
 
+    private final PdfDemoRestClientAuthConfiguration config;
     @Value("{client.url}")
     private String baseUrl;
     private final RestClient client = RestClient.create(baseUrl);
@@ -23,6 +24,7 @@ public final class PdfDemoRestClientImpl implements PdfDemoRestClient {
         return client.post().uri("/print/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(object)
+                .headers(h -> h.setBasicAuth(config.getUsername(), config.getPassword()))
                 .retrieve()
                 .toEntity(PdfDto.class)
                 .getBody();
