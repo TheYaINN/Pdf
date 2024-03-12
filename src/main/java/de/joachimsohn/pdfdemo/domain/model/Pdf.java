@@ -6,5 +6,5 @@ import org.jetbrains.annotations.NotNull;
 import java.util.UUID;
 
 @Builder
-public record Pdf(@NotNull UUID id, @NotNull byte[] content) {
+public record Pdf(@NotNull UUID id, byte[] content) {
 }
