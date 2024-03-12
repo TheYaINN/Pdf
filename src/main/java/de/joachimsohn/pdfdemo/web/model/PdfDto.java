@@ -1,15 +1,10 @@
 package de.joachimsohn.pdfdemo.web.model;
 
 import lombok.Builder;
-import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-@Data
 @Builder
-public final class PdfDto {
-    
-    private UUID id;
-    private String name;
-    private byte[] content;
+public record PdfDto(@NotNull UUID id, @NotNull String name, byte[] content) {
 }

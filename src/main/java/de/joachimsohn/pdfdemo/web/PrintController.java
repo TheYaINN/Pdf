@@ -42,12 +42,12 @@ public final class PrintController {
     private ResponseEntity<InputStreamResource> createResponse(final @NotNull PdfDto pdf) {
         final var headers = new HttpHeaders();
         headers.setContentType(MediaTypeFactory
-                .getMediaType(pdf.getName())
+                .getMediaType(pdf.name())
                 .orElse(MediaType.APPLICATION_OCTET_STREAM));
         headers.setContentDisposition(ContentDisposition
                 .inline()
-                .filename(pdf.getName())
+                .filename(pdf.name())
                 .build());
-        return new ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(pdf.getContent())), headers, HttpStatus.OK);
+        return new ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(pdf.content())), headers, HttpStatus.OK);
     }
 }
