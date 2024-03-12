@@ -6,11 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 import java.io.IOException;
 import java.util.UUID;
 
+@Component
 @RequiredArgsConstructor
 public class PdfDemoRestClientImpl implements PdfDemoRestClient {
 

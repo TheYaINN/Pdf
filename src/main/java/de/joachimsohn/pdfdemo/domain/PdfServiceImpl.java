@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 @AllArgsConstructor
@@ -31,7 +30,7 @@ final class PdfServiceImpl implements PdfService {
     @Override public @NotNull PdfDto create(final @NotNull Object body) {
         final var pdf = pdfCreationService.generatePdfFromHtml();
         final var id = UUID.randomUUID();
-        CompletableFuture.runAsync(() -> {
+        Thread.startVirtualThread(() -> {
             final var path = saver.save(pdf, id);
             repository.save(Pdf.builder().path(path).id(id).build());
         });
