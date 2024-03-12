@@ -1,9 +1,8 @@
 package de.joachimsohn.pdfdemo.domain;
 
 import de.joachimsohn.pdfdemo.domain.filesave.PdfHandler;
-import de.joachimsohn.pdfdemo.domain.repository.PdfRepository;
-import de.joachimsohn.pdfdemo.domain.repository.model.Pdf;
-import de.joachimsohn.pdfdemo.web.model.PdfDto;
+import de.joachimsohn.pdfdemo.domain.model.Pdf;
+import de.joachimsohn.pdfdemo.repository.PdfRepository;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -19,25 +18,25 @@ final class PdfServiceImpl implements PdfService {
     private PdfHandler saver;
 
     @Override
-    public @NotNull PdfDto fetchById(final @NotNull UUID id) {
-        return repository.findById(id).map(db -> PdfDto.builder()
+    public @NotNull Pdf fetchById(final @NotNull UUID id) {
+        return repository.findById(id).map(db -> Pdf.builder()
                 .id(db.getId())
-                .name("%s.pdf".formatted(id))
                 .content(saver.load(db.getPath()))
                 .build()).orElseThrow();
     }
 
-    @Override public @NotNull PdfDto create(final @NotNull Object body) {
-        final var pdf = pdfCreationService.generatePdfFromHtml();
+    @Override public @NotNull Pdf create(final @NotNull Object body) {
+        final var pdfContent = pdfCreationService.generatePdfFromHtml();
         final var id = UUID.randomUUID();
+        final var pdf = Pdf.builder().id(id).content(pdfContent).build();
         Thread.startVirtualThread(() -> {
-            final var path = saver.save(pdf, id);
-            repository.save(Pdf.builder().path(path).id(id).build());
+            //TODO: this should be in a seperate handler class, to convert between domains
+            final var path = saver.save(pdf);
+            repository.save(de.joachimsohn.pdfdemo.repository.model.Pdf.builder()
+                    .id(id)
+                    .path(path)
+                    .build());
         });
-        return PdfDto.builder()
-                .id(id)
-                .name("%s.pdf".formatted(id))
-                .content(pdf)
-                .build();
+        return pdf;
     }
 }

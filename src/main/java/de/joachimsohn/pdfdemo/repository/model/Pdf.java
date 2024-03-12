@@ -1,4 +1,4 @@
-package de.joachimsohn.pdfdemo.domain.repository.model;
+package de.joachimsohn.pdfdemo.repository.model;
 
 
 import jakarta.persistence.Column;
@@ -24,4 +24,8 @@ public final class Pdf {
 
     @Column(nullable = false)
     private String path;
+
+    public String name() {
+        return "%s.pdf".formatted(id);
+    }
 }

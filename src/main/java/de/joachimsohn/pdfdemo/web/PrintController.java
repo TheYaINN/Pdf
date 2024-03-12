@@ -1,6 +1,5 @@
 package de.joachimsohn.pdfdemo.web;
 
-import de.joachimsohn.pdfdemo.domain.PdfService;
 import de.joachimsohn.pdfdemo.web.model.PdfDto;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +23,7 @@ import java.util.UUID;
 @RequestMapping("/print/")
 public final class PrintController {
 
-    private final PdfService pdfService;
+    private final PdfWebAdapter adapter;
 
     /**
      * Extra info: <a href="https://stackoverflow.com/questions/5673260/downloading-a-file-from-spring-controllers">...</a>
@@ -32,12 +31,12 @@ public final class PrintController {
      */
     @GetMapping
     public @NotNull ResponseEntity<PdfDto> print() {
-        return ResponseEntity.ok(pdfService.create(new Object()));
+        return ResponseEntity.ok(adapter.create(new Object()));
     }
 
     @GetMapping("{id}")
     public @NotNull ResponseEntity<InputStreamResource> get(@PathVariable final @NotNull UUID id) {
-        return createResponse(pdfService.fetchById(id));
+        return createResponse(adapter.get(id));
     }
 
     private ResponseEntity<InputStreamResource> createResponse(final @NotNull PdfDto pdf) {

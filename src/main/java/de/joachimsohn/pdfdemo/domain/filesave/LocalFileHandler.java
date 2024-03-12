@@ -1,5 +1,6 @@
 package de.joachimsohn.pdfdemo.domain.filesave;
 
+import de.joachimsohn.pdfdemo.domain.model.Pdf;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.UUID;
 
 @Component
 public final class LocalFileHandler implements PdfHandler {
@@ -18,8 +18,8 @@ public final class LocalFileHandler implements PdfHandler {
     private String basePath;
 
     @Override
-    public String save(final byte[] content, final @NotNull UUID id) {
-        final var name = id.toString();
+    public String save(final @NotNull Pdf pdf) {
+        final var name = pdf.id().toString();
         final var folderPath = "%s/%s".formatted(basePath, Arrays.stream(name.split("-")).findFirst().orElseThrow());
         final var filePath = "%s/%s.pdf".formatted(folderPath, name);
         final var folder = new File(folderPath);
@@ -27,7 +27,7 @@ public final class LocalFileHandler implements PdfHandler {
             folder.mkdirs();
         }
         try (final var stream = new FileOutputStream(filePath)) {
-            stream.write(content);
+            stream.write(pdf.content());
         } catch (final IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,6 @@
-package de.joachimsohn.pdfdemo.domain.repository;
+package de.joachimsohn.pdfdemo.repository;
 
-import de.joachimsohn.pdfdemo.domain.repository.model.Pdf;
+import de.joachimsohn.pdfdemo.repository.model.Pdf;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
