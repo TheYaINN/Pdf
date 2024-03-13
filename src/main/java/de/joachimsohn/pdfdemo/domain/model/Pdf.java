@@ -7,4 +7,6 @@ import java.util.UUID;
 
 @Builder
 public record Pdf(@NotNull UUID id, byte[] content) {
+
+
 }

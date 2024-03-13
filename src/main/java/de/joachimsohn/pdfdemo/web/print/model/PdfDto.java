@@ -1,4 +1,4 @@
-package de.joachimsohn.pdfdemo.web.model;
+package de.joachimsohn.pdfdemo.web.print.model;
 
 import lombok.Builder;
 import org.jetbrains.annotations.NotNull;

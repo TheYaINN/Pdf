@@ -1,6 +1,6 @@
 package de.joachimsohn.pdfdemo.api;
 
-import de.joachimsohn.pdfdemo.web.model.PdfDto;
+import de.joachimsohn.pdfdemo.web.print.model.PdfDto;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;

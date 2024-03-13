@@ -1,7 +1,9 @@
 package de.joachimsohn.pdfdemo.domain;
 
+import de.joachimsohn.pdfdemo.domain.creator.PdfCreationService;
 import de.joachimsohn.pdfdemo.domain.filesave.PdfHandler;
 import de.joachimsohn.pdfdemo.domain.model.Pdf;
+import de.joachimsohn.pdfdemo.domain.model.PdfData;
 import de.joachimsohn.pdfdemo.repository.PdfRepository;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -25,8 +27,9 @@ final class PdfServiceImpl implements PdfService {
                 .build()).orElseThrow();
     }
 
-    @Override public @NotNull Pdf create(final @NotNull Object body) {
-        final var pdfContent = pdfCreationService.generatePdfFromHtml();
+
+    @Override public @NotNull Pdf create(final @NotNull PdfData pdfData) {
+        final var pdfContent = pdfCreationService.generatePdfFromHtml(pdfData);
         final var id = UUID.randomUUID();
         final var pdf = Pdf.builder().id(id).content(pdfContent).build();
         Thread.startVirtualThread(() -> {

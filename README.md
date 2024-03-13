@@ -1,24 +1,9 @@
 # A Microservice designed to handle PDFs
 
-To start just start as a Service and open <code>localhost:8080/print/</code> in your browser. You should immediately see
-a PDF and in your [specified folder](src/main/resources/application.properties) in the corresponding PDF locally.
-Additionally you can open the [h2 console ](http://localhost:8080/h2-console) and check for the file location there and
-its corresponding ID
+This is a Microservice to handle PDF in a fast and resilient way.
+The main purpose is to avoid sending PDF across your internal network and only ever sending and storing the UUID of the PDF in your applications.
+This ensures all PDFS are in one location in your system to allow for modification, filtering etc. when necessary in bulk.
 
-```plantuml
-start
-:Import Client into Project;
-->Configure application.properties;
-:Read values from Vault; 
-:Send Request to PdfService;
-->Read Headers from Request;
-:Authenticate access via OAuth;
-:process Request;
-fork
-    :save metadata in DB;
-    :Save file locally;
-fork again
-    :Send Response;
-end fork
-end
-```
+The concept is that a Thymeleaf engine create a PDF which is then processed internally and simultaneously send as a response to the requester.
+Internally the PDF is saved as a PDF file on the drive and an entry is saved in a DB where the UUID of the PDF and its corresponding (relative) path is stored.
+This ensures fast retrieval of documents in the future when needed.

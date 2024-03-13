@@ -1,6 +1,7 @@
-package de.joachimsohn.pdfdemo.web;
+package de.joachimsohn.pdfdemo.web.print;
 
-import de.joachimsohn.pdfdemo.web.model.PdfDto;
+import de.joachimsohn.pdfdemo.web.print.model.data.PdfDataWrapper;
+import de.joachimsohn.pdfdemo.web.print.model.PdfDto;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.io.InputStreamResource;
@@ -12,6 +13,8 @@ import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,11 +30,10 @@ public final class PrintController {
 
     /**
      * Extra info: <a href="https://stackoverflow.com/questions/5673260/downloading-a-file-from-spring-controllers">...</a>
-     * TODO: should actually be a PUT request with a body, that is supposed to be mapped into a Dto and then used in the domain, but is as for now kept simple to avoid complexity
      */
-    @GetMapping
-    public @NotNull ResponseEntity<PdfDto> print() {
-        return ResponseEntity.ok(adapter.create(new Object()));
+    @PostMapping
+    public @NotNull ResponseEntity<PdfDto> print(@RequestBody final @NotNull PdfDataWrapper wrapper) {
+        return ResponseEntity.ok(adapter.create(wrapper));
     }
 
     @GetMapping("{id}")

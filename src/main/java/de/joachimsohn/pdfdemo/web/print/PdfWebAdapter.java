@@ -1,8 +1,10 @@
-package de.joachimsohn.pdfdemo.web;
+package de.joachimsohn.pdfdemo.web.print;
 
 import de.joachimsohn.pdfdemo.domain.PdfService;
 import de.joachimsohn.pdfdemo.domain.model.Pdf;
-import de.joachimsohn.pdfdemo.web.model.PdfDto;
+import de.joachimsohn.pdfdemo.web.print.mapper.PdfMapper;
+import de.joachimsohn.pdfdemo.web.print.model.PdfDto;
+import de.joachimsohn.pdfdemo.web.print.model.data.PdfDataWrapper;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
@@ -14,9 +16,10 @@ import java.util.UUID;
 public final class PdfWebAdapter {
 
     private final PdfService service;
+    private final PdfMapper mapper;
 
-    public @NotNull PdfDto create(final @NotNull Object someModel) {
-        return toDto(service.create(someModel));
+    public @NotNull PdfDto create(final @NotNull PdfDataWrapper wrapper) {
+        return toDto(service.create(mapper.toDomain(wrapper)));
     }
 
     public @NotNull PdfDto get(final @NotNull UUID id) {
