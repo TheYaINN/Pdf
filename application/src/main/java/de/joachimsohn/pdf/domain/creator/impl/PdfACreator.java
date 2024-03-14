@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
 
 @Component
-public final class TypeAPdfCreator extends BasePdfCreator {
+public final class PdfACreator extends BasePdfCreator {
 
     @Override public boolean applies(final @NotNull PdfType type) {
         return PdfType.TYPE_A.equals(type);
@@ -20,7 +20,7 @@ public final class TypeAPdfCreator extends BasePdfCreator {
 
     @Override protected @NotNull Context getContext(final @NotNull PdfContextData contextData) {
         Context context = new Context();
-        context.setVariable("title", "My very thoughtful title");
+        context.setVariable("title", "AAAAAAA");
         return context;
     }
 }
