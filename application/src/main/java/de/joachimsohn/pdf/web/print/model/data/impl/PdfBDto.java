@@ -17,6 +17,7 @@ public final class PdfBDto implements PdfDataWrapper {
     }
 
     @Data
+    @Builder
     public static final class PdfBDataDto implements PdfDataDto {
         private String important;
     }

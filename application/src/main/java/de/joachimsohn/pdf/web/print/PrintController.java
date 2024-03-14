@@ -29,11 +29,7 @@ import java.util.UUID;
 public final class PrintController {
 
     private final PdfWebAdapter adapter;
-    private final ObjectMapper mapper;
 
-    /**
-     * Extra info: <a href="https://stackoverflow.com/questions/5673260/downloading-a-file-from-spring-controllers">...</a>
-     */
     @PostMapping
     public @NotNull ResponseEntity<PdfDto> print(@RequestBody final @NotNull PdfDataWrapper wrapper) {
         return ResponseEntity.ok(adapter.create(wrapper));

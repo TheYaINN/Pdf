@@ -1,6 +1,7 @@
 package de.joachimsohn.api;
 
 import de.joachimsohn.pdf.web.print.model.PdfDto;
+import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class PdfDemoRestClientImpl implements PdfDemoRestClient {
+public final class PdfDemoRestClientImpl implements PdfDemoRestClient {
 
     private final PdfDemoRestClientAuthConfiguration config;
     @Value("{client.url}")
@@ -22,10 +23,10 @@ public class PdfDemoRestClientImpl implements PdfDemoRestClient {
     private final RestClient client = RestClient.create(baseUrl);
 
     @Override
-    public @NotNull PdfDto print(final @NotNull Object object) {
-        return client.post().uri("/print/")
+    public @NotNull PdfDto print(final @NotNull PdfDataWrapper wrapper) {
+        return client.post().uri("%s/print/".formatted("http://localhost:8080"))
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(object)
+                .body(wrapper)
                 .headers(h -> h.setBasicAuth(config.getUsername(), config.getPassword()))
                 .retrieve()
                 .toEntity(PdfDto.class)
@@ -34,15 +35,8 @@ public class PdfDemoRestClientImpl implements PdfDemoRestClient {
 
     @Override
     public byte[] get(final @NotNull UUID id) {
-        try {
-            return client.get().uri("/print/{id}", id)
-                    .retrieve()
-                    .body(InputStreamResource.class)
-                    .getInputStream()
-                    .readAllBytes();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return client.get().uri("%s/print/{id}".formatted("http://localhost:8080"), id)
+                .exchange((clientRequest, clientResponse) -> clientResponse.getBody().readAllBytes());
     }
 }
 
