@@ -3,24 +3,21 @@ package de.joachimsohn.pdf.web.print.model.data.impl;
 import de.joachimsohn.pdf.web.print.model.data.PdfDataDto;
 import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
 import de.joachimsohn.pdf.web.print.model.data.PdfType;
+import lombok.Builder;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 
 @Data
 public final class PdfBDto implements PdfDataWrapper {
 
-    private PdfBData bdata;
+    private PdfBDataDto data;
 
-    @Override
-    public @NotNull PdfType getType() {
+    @Override public @NotNull String getType() {
         return PdfType.TYPE_B;
     }
 
-    @Override public @NotNull PdfDataDto getData() {
-        return bdata;
-    }
-
-    public static final class PdfBData implements PdfDataDto {
+    @Data
+    public static final class PdfBDataDto implements PdfDataDto {
         private String important;
     }
 

@@ -3,6 +3,7 @@ package de.joachimsohn.pdf.domain.creator.impl;
 import de.joachimsohn.pdf.domain.creator.BasePdfCreator;
 import de.joachimsohn.pdf.domain.model.PdfContextData;
 import de.joachimsohn.pdf.domain.model.PdfData.PdfType;
+import de.joachimsohn.pdf.domain.model.impl.PdfA.PdfAContextData;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
@@ -18,9 +19,10 @@ public final class PdfACreator extends BasePdfCreator {
         return "thymeleaf_template";
     }
 
-    @Override protected @NotNull Context getContext(final @NotNull PdfContextData contextData) {
+    @Override protected @NotNull <T extends PdfContextData> Context getContext(@NotNull final T contextData) {
+        final var casted = (PdfAContextData) contextData;
         Context context = new Context();
-        context.setVariable("title", "AAAAAAA");
+        context.setVariable("title", casted.getHiddenData());
         return context;
     }
 }

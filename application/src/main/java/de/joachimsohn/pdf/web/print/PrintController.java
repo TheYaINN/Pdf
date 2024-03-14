@@ -2,6 +2,7 @@ package de.joachimsohn.pdf.web.print;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.joachimsohn.pdf.web.print.model.PdfDto;
+import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
 import de.joachimsohn.pdf.web.print.model.data.impl.PdfADto;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,8 +35,8 @@ public final class PrintController {
      * Extra info: <a href="https://stackoverflow.com/questions/5673260/downloading-a-file-from-spring-controllers">...</a>
      */
     @PostMapping
-    public @NotNull ResponseEntity<PdfDto> print() {
-        return ResponseEntity.ok(adapter.create(new PdfADto()));
+    public @NotNull ResponseEntity<PdfDto> print(@RequestBody final @NotNull PdfDataWrapper wrapper) {
+        return ResponseEntity.ok(adapter.create(wrapper));
     }
 
     @GetMapping("{id}")

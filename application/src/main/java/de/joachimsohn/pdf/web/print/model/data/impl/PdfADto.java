@@ -9,18 +9,14 @@ import org.jetbrains.annotations.NotNull;
 @Data
 public final class PdfADto implements PdfDataWrapper {
 
-    private PdfAData aData;
+    private PdfADataDto data;
 
-    @Override
-    public @NotNull PdfType getType() {
+    @Override public @NotNull String getType() {
         return PdfType.TYPE_A;
     }
 
-    @Override public @NotNull PdfDataDto getData() {
-        return aData;
-    }
-
-    public static final class PdfAData implements PdfDataDto {
+    @Data
+    public static final class PdfADataDto implements PdfDataDto {
         private String test;
     }
 

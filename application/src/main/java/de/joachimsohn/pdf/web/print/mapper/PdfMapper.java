@@ -1,8 +1,9 @@
 package de.joachimsohn.pdf.web.print.mapper;
 
-import de.joachimsohn.pdf.domain.model.PdfContextData;
 import de.joachimsohn.pdf.domain.model.PdfData;
+import de.joachimsohn.pdf.domain.model.impl.PdfA;
 import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
+import de.joachimsohn.pdf.web.print.model.data.impl.PdfADto;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -10,18 +11,10 @@ import org.springframework.stereotype.Component;
 public final class PdfMapper {
 
     public @NotNull PdfData toDomain(final @NotNull PdfDataWrapper wrapper) {
-        return new PdfData() {
-            @Override public @NotNull PdfType getType() {
-                return switch (wrapper.getType()) {
-                    case TYPE_A -> PdfType.TYPE_A;
-                    case TYPE_B -> PdfType.TYPE_B;
-                };
-            }
-
-            @Override public @NotNull PdfContextData getContextData() {
-                return new PdfContextData() {
-                };
-            }
-        };
+        return PdfA.builder()
+                .contextData(PdfA.PdfAContextData.builder()
+                        .hiddenData(((PdfADto.PdfADataDto)wrapper.getData()).getTest())
+                        .build())
+                .build();
     }
 }
