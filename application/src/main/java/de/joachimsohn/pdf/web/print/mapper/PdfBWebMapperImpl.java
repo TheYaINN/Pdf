@@ -22,7 +22,7 @@ public final class PdfBWebMapperImpl implements PdfWebMapper {
         final var casted = (PdfBDto.PdfBDataDto) data;
         return PdfB.builder()
                 .contextData(PdfBContextData.builder()
-                        .someBData(((PdfBDto.PdfBDataDto) data).getImportant())
+                        .someBData(casted.getImportant())
                         .build())
                 .build();
     }
