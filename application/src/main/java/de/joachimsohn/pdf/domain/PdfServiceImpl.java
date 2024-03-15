@@ -33,7 +33,6 @@ final class PdfServiceImpl implements PdfService {
         final var id = UUID.randomUUID();
         final var pdf = Pdf.builder().id(id).content(pdfContent).build();
         Thread.startVirtualThread(() -> {
-        //TODO: the repository should have another Abstraction layer to decouple it from the domain itself
         final var path = saver.save(pdf);
         repository.save(de.joachimsohn.pdf.repository.model.Pdf.builder()
                 .id(id)
