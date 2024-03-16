@@ -1,9 +1,7 @@
 package de.joachimsohn.pdf.web.print;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.joachimsohn.pdf.web.print.model.PdfDto;
 import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
-import de.joachimsohn.pdf.web.print.model.data.impl.PdfADto;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.io.InputStreamResource;
@@ -36,19 +34,19 @@ public final class PrintController {
     }
 
     @GetMapping("{id}")
-    public @NotNull ResponseEntity<InputStreamResource> get(@PathVariable final @NotNull UUID id) {
+    public @NotNull ResponseEntity<InputStreamResource> get(@PathVariable("id") final @NotNull UUID id) {
         return createResponse(adapter.get(id));
     }
 
     private ResponseEntity<InputStreamResource> createResponse(final @NotNull PdfDto pdf) {
         final var headers = new HttpHeaders();
         headers.setContentType(MediaTypeFactory
-                .getMediaType(pdf.name())
+                .getMediaType(pdf.getName())
                 .orElse(MediaType.APPLICATION_OCTET_STREAM));
         headers.setContentDisposition(ContentDisposition
                 .inline()
-                .filename(pdf.name())
+                .filename(pdf.getName())
                 .build());
-        return new ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(pdf.content())), headers, HttpStatus.OK);
+        return new ResponseEntity<>(new InputStreamResource(new ByteArrayInputStream(pdf.getContent())), headers, HttpStatus.OK);
     }
 }

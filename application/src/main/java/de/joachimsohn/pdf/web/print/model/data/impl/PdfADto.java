@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public final class PdfADto implements PdfDataWrapper {
 
     private PdfADataDto data;

@@ -27,17 +27,16 @@ final class PdfServiceImpl implements PdfService {
                 .build()).orElseThrow();
     }
 
-
     @Override public @NotNull Pdf create(final @NotNull PdfData pdfData) {
         final var pdfContent = pdfCreationService.generatePdfFromHtml(pdfData);
         final var id = UUID.randomUUID();
         final var pdf = Pdf.builder().id(id).content(pdfContent).build();
         Thread.startVirtualThread(() -> {
-        final var path = saver.save(pdf);
-        repository.save(de.joachimsohn.pdf.repository.model.Pdf.builder()
-                .id(id)
-                .path(path)
-                .build());
+            final var path = saver.save(pdf);
+            repository.save(de.joachimsohn.pdf.repository.model.Pdf.builder()
+                    .id(id)
+                    .path(path)
+                    .build());
         });
         return pdf;
     }
