@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: TheYaINN
+      changes:
+        - createTable:
+            tableName: pdf
+            ifNotExists: true
+            columns:
+              - column:
+                  name: something
+                  type: VARCHAR(255)
+
+        - addColumn:
+            tableName: pdf
+            columns:
+              - column:
+                  name: test
+                  type: VARCHAR(255 )
