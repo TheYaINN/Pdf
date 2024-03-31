@@ -1,7 +1,7 @@
 package de.joachimsohn.pdf.web.print;
 
-import de.joachimsohn.pdf.web.print.model.PdfDto;
-import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
+import de.joachimsohn.model.PdfDto;
+import de.joachimsohn.model.data.PdfDataWrapper;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.io.InputStreamResource;

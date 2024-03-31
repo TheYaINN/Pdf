@@ -1,4 +1,4 @@
-package de.joachimsohn.pdf.web.print.model;
+package de.joachimsohn.model;
 
 import lombok.Builder;
 import lombok.Builder.Default;

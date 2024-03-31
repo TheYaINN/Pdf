@@ -1,10 +1,10 @@
 package de.joachimsohn.pdf.web.print.mapper;
 
+import de.joachimsohn.model.data.PdfDataDto;
+import de.joachimsohn.model.data.PdfType;
+import de.joachimsohn.model.data.impl.PdfADto;
 import de.joachimsohn.pdf.domain.model.PdfData;
 import de.joachimsohn.pdf.domain.model.impl.PdfA;
-import de.joachimsohn.pdf.web.print.model.data.PdfDataDto;
-import de.joachimsohn.pdf.web.print.model.data.PdfType;
-import de.joachimsohn.pdf.web.print.model.data.impl.PdfADto;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 

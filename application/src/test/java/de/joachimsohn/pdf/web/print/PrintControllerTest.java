@@ -1,10 +1,10 @@
 package de.joachimsohn.pdf.web.print;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.joachimsohn.pdf.web.print.model.PdfDto;
-import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
-import de.joachimsohn.pdf.web.print.model.data.impl.PdfADto;
-import de.joachimsohn.pdf.web.print.model.data.impl.PdfBDto;
+import de.joachimsohn.model.PdfDto;
+import de.joachimsohn.model.data.PdfDataWrapper;
+import de.joachimsohn.model.data.impl.PdfADto;
+import de.joachimsohn.model.data.impl.PdfBDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

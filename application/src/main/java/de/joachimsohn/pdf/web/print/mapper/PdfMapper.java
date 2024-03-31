@@ -1,9 +1,9 @@
 package de.joachimsohn.pdf.web.print.mapper;
 
+import de.joachimsohn.model.PdfDto;
+import de.joachimsohn.model.data.PdfDataWrapper;
+import de.joachimsohn.pdf.domain.model.Pdf;
 import de.joachimsohn.pdf.domain.model.PdfData;
-import de.joachimsohn.pdf.domain.model.impl.PdfA;
-import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
-import de.joachimsohn.pdf.web.print.model.data.impl.PdfADto;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
@@ -22,5 +22,13 @@ public final class PdfMapper {
                 .findFirst()
                 .map(m -> m.convert(wrapper.getData()))
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public @NotNull PdfDto toDto(final @NotNull Pdf pdf) {
+        return PdfDto.builder()
+                .id(pdf.id())
+                .name("%s.pdf".formatted(pdf.id()))
+                .content(pdf.content())
+                .build();
     }
 }

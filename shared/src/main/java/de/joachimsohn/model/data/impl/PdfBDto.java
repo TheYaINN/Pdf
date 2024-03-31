@@ -1,8 +1,8 @@
-package de.joachimsohn.pdf.web.print.model.data.impl;
+package de.joachimsohn.model.data.impl;
 
-import de.joachimsohn.pdf.web.print.model.data.PdfDataDto;
-import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
-import de.joachimsohn.pdf.web.print.model.data.PdfType;
+import de.joachimsohn.model.data.PdfDataDto;
+import de.joachimsohn.model.data.PdfDataWrapper;
+import de.joachimsohn.model.data.PdfType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package de.joachimsohn.pdf.web.print.mapper;
 
+import de.joachimsohn.model.data.PdfDataDto;
 import de.joachimsohn.pdf.domain.model.PdfData;
-import de.joachimsohn.pdf.web.print.model.data.PdfDataDto;
 import org.jetbrains.annotations.NotNull;
 
 public interface PdfWebMapper {

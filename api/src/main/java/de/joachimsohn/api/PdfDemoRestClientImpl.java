@@ -1,16 +1,14 @@
 package de.joachimsohn.api;
 
-import de.joachimsohn.pdf.web.print.model.PdfDto;
-import de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper;
+import de.joachimsohn.model.PdfDto;
+import de.joachimsohn.model.data.PdfDataWrapper;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-import java.io.IOException;
 import java.util.UUID;
 
 @Component

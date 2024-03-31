@@ -1,16 +1,14 @@
-package de.joachimsohn.pdf.web.print.model.data;
+package de.joachimsohn.model.data;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import de.joachimsohn.pdf.web.print.model.data.impl.PdfADto;
-import de.joachimsohn.pdf.web.print.model.data.impl.PdfBDto;
+import de.joachimsohn.model.data.impl.PdfADto;
+import de.joachimsohn.model.data.impl.PdfBDto;
 import org.jetbrains.annotations.NotNull;
 
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.EXISTING_PROPERTY;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CUSTOM;
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
-import static de.joachimsohn.pdf.web.print.model.data.PdfDataWrapper.*;
 
 @JsonTypeInfo(
         use = NAME,
