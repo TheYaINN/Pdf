@@ -8,7 +8,6 @@ import java.util.UUID;
 
 public interface PdfDemoRestClient {
 
-
     @NotNull PdfDto print(final @NotNull PdfDataWrapper wrapper);
 
     byte[] get(final @NotNull UUID id);

@@ -15,7 +15,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public final class PdfDemoRestClientImpl implements PdfDemoRestClient {
 
-    private final PdfDemoRestClientAuthConfiguration config;
+    private final AuthConfig config;
+
     @Value("{client.url}")
     private String baseUrl;
     private final RestClient client = RestClient.create(baseUrl);

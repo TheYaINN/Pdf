@@ -35,6 +35,7 @@
         <module>api</module>
         <module>shared</module>
     </modules>
+    
     <dependencies>
         <dependency>
             <groupId>org.jetbrains</groupId>
