@@ -6,5 +6,4 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public final class ReSTExceptionHandler extends ResponseEntityExceptionHandler {
 
-
 }

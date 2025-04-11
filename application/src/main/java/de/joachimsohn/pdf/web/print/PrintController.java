@@ -2,6 +2,12 @@ package de.joachimsohn.pdf.web.print;
 
 import de.joachimsohn.model.PdfDto;
 import de.joachimsohn.model.data.PdfDataWrapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.io.InputStreamResource;
@@ -28,13 +34,27 @@ public final class PrintController {
 
     private final PdfWebAdapter adapter;
 
+    @Operation(summary = "Create and save a new PDF")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "successfully created and saved PDF",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PdfDto.class))}
+            )})
     @PostMapping
-    public @NotNull ResponseEntity<PdfDto> print(@RequestBody final @NotNull PdfDataWrapper wrapper) {
+    public @NotNull ResponseEntity<PdfDto> print(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The Data to be used for Printing the PDF", required = true) @RequestBody final @NotNull PdfDataWrapper wrapper) {
         return ResponseEntity.ok(adapter.create(wrapper));
     }
 
+    @Operation(summary = "Get a PDF as InputStreamResource by its UUID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "successfully retrieved PDF",
+                    content = {@Content(mediaType = "application/octet-stream",
+                            schema = @Schema(implementation = InputStreamResource.class))})
+    })
     @GetMapping("{id}")
-    public @NotNull ResponseEntity<InputStreamResource> get(@PathVariable("id") final @NotNull UUID id) {
+    public @NotNull ResponseEntity<InputStreamResource> get(@Parameter(description = "The ID of the PDF to be retrieved") @PathVariable("id") final @NotNull UUID id) {
         return createResponse(adapter.get(id));
     }
 

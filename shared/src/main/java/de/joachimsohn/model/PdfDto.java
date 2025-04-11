@@ -14,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class PdfDto {
+
     @Default
     private final @NotNull UUID id = UUID.randomUUID();
 

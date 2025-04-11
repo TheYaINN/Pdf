@@ -20,7 +20,6 @@ public final class PdfWebAdapter {
     private final PdfMapper mapper;
 
     public @NotNull PdfDto create(final @NotNull PdfDataWrapper wrapper) {
-        log.info("Creating PDF: {}", wrapper);
         return mapper.toDto(service.create(mapper.toDomain(wrapper)));
     }
 

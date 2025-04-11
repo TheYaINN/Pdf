@@ -24,6 +24,8 @@
         <ognl.version>3.4.0</ognl.version>
         <xhtmlrenderer.version>9.1.22</xhtmlrenderer.version>
         <jetbrains.annotations.version>24.1.0</jetbrains.annotations.version>
+        <swagger.version>2.3.0</swagger.version>
+        <loki.version>1.4.1</loki.version>
 
         <spring-boot.version>3.2.0</spring-boot.version>
         <spring-security-test.version>6.2.1</spring-security-test.version>
@@ -35,7 +37,7 @@
         <module>api</module>
         <module>shared</module>
     </modules>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.jetbrains</groupId>
